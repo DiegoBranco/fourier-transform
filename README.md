@@ -1,2 +1,2 @@
 # fourier-transform
-Proyecto de C´ALCULO CIENT´IFICO (6109), SEMESTRE I-2025
+Proyecto de CALCULO CIENTIFICO (6109), SEMESTRE I-2025
