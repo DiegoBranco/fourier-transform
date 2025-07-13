@@ -28,7 +28,10 @@ class NumPad(tk.Frame):
 
     def create_widgets(self):
         self.display = tk.Entry(self, width=20, font=('Arial', 18), justify='right')
-        self.display.grid(row=0, column=0, columnspan=3, pady=5)
+        self.display.grid(row=0, column=0, columnspan=3, pady=2)
+        self.play_button = tk.Button(self, text="▶", width=5, height=2, font=('Arial', 16)
+                                     ,command=self.on_play_button)
+        self.play_button.grid(row=5, column=2, padx=2, pady=2)
 
         buttons = [
             ('1', 1, 0), ('2', 1, 1), ('3', 1, 2),
@@ -66,6 +69,7 @@ class NumPad(tk.Frame):
         self.ax_freq.set_xlabel("Frecuencia [Hz]")
         self.ax_freq.set_ylabel("Magnitud")
         self.ax_freq.grid(True)
+        self.figure.subplots_adjust(hspace=0.5)
         self.canvas = FigureCanvasTkAgg(self.figure, master=self)
         # Canvas a la derecha de los botones
         self.canvas.get_tk_widget().grid(row=0, column=3, rowspan=7, padx=10, pady=5, sticky="nsew")
@@ -93,7 +97,6 @@ class NumPad(tk.Frame):
         self.ax_freq.set_ylabel("Magnitud")
         self.ax_freq.set_xlim(0, 2500)
         self.ax_freq.grid(True)
-
         self.canvas.draw()
 
     def play_dtmf(self, char):
@@ -128,13 +131,21 @@ class NumPad(tk.Frame):
                 f1, f2 = DTMF_FREQS[char]
                 tone = 0.5 * (np.sin(2 * np.pi * f1 * t) + np.sin(2 * np.pi * f2 * t))
                 audio = np.concatenate((audio, tone))
-        # Normalize to int16
+        # Normalizar
         audio_int16 = np.int16(audio / np.max(np.abs(audio)) * 32767)
         file_path = fd.asksaveasfilename(defaultextension=".wav", filetypes=[("WAV files", "*.wav")])
         if file_path:
             wavfile.write(file_path, FS, audio_int16)
 
+    def on_play_button(self):
+        global tones
+        #let me play you the song of my people
+        for char in tones:
+            self.play_dtmf(char)
+
     def import_and_decode_wav(self):
+        global tones
+        tones = ""
         file_path = fd.askopenfilename(filetypes=[("WAV files", "*.wav")])
         if not file_path:
             return
@@ -157,23 +168,22 @@ class NumPad(tk.Frame):
             freqs = np.fft.rfftfreq(window_size, 1/fs)
 
             # Busca picos
-            found = []
             for key, (f1, f2) in DTMF_FREQS.items():
                 idx1 = np.argmin(np.abs(freqs - f1))
                 idx2 = np.argmin(np.abs(freqs - f2))
                 if spectrum[idx1] > 0.3 * np.max(spectrum) and spectrum[idx2] > 0.3 * np.max(spectrum):
-                    found.append(key)
-            if found:
-                detected.append(found[0])  # Take the first match
+                    detected.append(key)
+                    break
 
-        # Remueve duplicados
-        #sequence = []
-        #for k in detected:
-        #    if not sequence or k != sequence[-1]:
-        #        sequence.append(k)
+
         print("Decoded DTMF sequence:", ''.join(detected))
         self.display.delete(0, tk.END)
-        self.display.insert(0, ''.join(detected))
+        self.display.insert(0, ''.join(detected))        
+        tones = ''.join(detected)
+        self.on_play_button()
+
+
+
 
 if __name__ == "__main__":
     root = tk.Tk()
