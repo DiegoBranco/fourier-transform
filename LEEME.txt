@@ -1,0 +1,19 @@
+# Dependencias e Instrucciones
+
+# Dependencias
+numpy
+scipy
+sounddevice
+matplotlib
+tkinter
+
+# Instrucciones
+# Requiere python 3.6 o superior.
+pip install numpy scipy sounddevice matplotlib
+
+# Nota: tkinter viene preinstalado con Python en la mayoría de las distribuciones.
+# (Ademas creo que todo el curso lo uso)
+
+
+# Correr el proyecto:
+python main.py
