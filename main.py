@@ -215,7 +215,7 @@ class NumPad(tk.Frame):
                     break
 
         # Mostrar y almacenar la secuencia detectada
-        print("Decoded DTMF sequence:", ''.join(detected))
+        print("Decodificando secuencia:", ''.join(detected))
         self.display.delete(0, tk.END)
         self.display.insert(0, ''.join(detected))        
         tones = ''.join(detected)
