@@ -1,19 +1,27 @@
-# Dependencias e Instrucciones
+# Instrucciones para ejecutar el programa.
+
+## Requisitos previos
+
+- Requiere python 3.6 o superior.
 
 # Dependencias
-numpy
-scipy
-sounddevice
-matplotlib
-tkinter
+- numpy
+- scipy
+- sounddevice
+- matplotlib
+- tkinter
 
 # Instrucciones
-# Requiere python 3.6 o superior.
-pip install numpy scipy sounddevice matplotlib
+1. Instala las dependencias: pip install numpy scipy sounddevice matplotlib
+2. Descarga el archivo "main.py"
+3. Abre el terminal o linea de comandos, navega hasta la carpeta donde guardaste "main.py" y ejecuta el programa.
+
+## Uso de la aplicacion
+- Teclado: Haz click en los botones del teclado para generar los tonos.
+- Reproducir secuencia: Presiona el boton `▶` para reproducir los tonos ingresados.
+- Exportar wav: Guarda la secuencia de tonos ingresada en un archivo de audio.
+- Importar wav: Carga un archivo wav para decodificar los tonos, estos seran reproducirdos y mostrara la teclas correspondientes en la interfaz.
+- Graficos: Estan para visualizar la señal en el tiempo y frecuencia al generar tonos.
+
 
 # Nota: tkinter viene preinstalado con Python en la mayoría de las distribuciones.
-# (Ademas creo que todo el curso lo uso)
-
-
-# Correr el proyecto:
-python main.py
