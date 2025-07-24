@@ -19,6 +19,7 @@
 ## Uso de la aplicacion
 - Teclado: Haz click en los botones del teclado para generar los tonos.
 - Reproducir secuencia: Presiona el boton `▶` para reproducir los tonos ingresados.
+- Limpiar secuencia: Presiona el boton `C` para limpiar la secuencia de tonos ingresados.
 - Exportar wav: Guarda la secuencia de tonos ingresada en un archivo de audio.
 - Importar wav: Carga un archivo wav para decodificar los tonos, estos seran reproducirdos y mostrara la teclas correspondientes en la interfaz.
 - Graficos: Estan para visualizar la señal en el tiempo y frecuencia al generar tonos.
